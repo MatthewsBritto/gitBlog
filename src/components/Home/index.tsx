@@ -43,9 +43,9 @@ export function Home(){
       
    }
 
-   // useEffect(() => {
-   //    getDataApi();
-   // },[])
+   useEffect(() => {
+      getDataApi();
+   },[])
   
    console.log(user)
    return (
