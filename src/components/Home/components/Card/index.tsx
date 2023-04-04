@@ -18,10 +18,7 @@ export function Card({body,comments,created_at,html_url,id,title}:PostsProps){
       const publishedDateRelativeNow = formatDistanceToNow((teste),{
          locale: ptBr,
          addSuffix:true,
-      })
-
-      console.log(publishedDateRelativeNow)
-      
+      })      
 
    return (
       <CardItem key={id}> 

@@ -47,7 +47,6 @@ export function Home(){
       getDataApi();
    },[])
   
-   console.log(user)
    return (
       <Background>
          

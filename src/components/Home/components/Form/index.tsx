@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { apiPost } from "../../../../lib/axios";
 import { FormContainer, InputContainer,CardsContainer} from "./styles";
 import { Card } from "../Card";
+import { useForm } from 'react-hook-form'
+import axios from "axios";
 
 
 
@@ -22,18 +24,18 @@ export function Form(){
 
    const [post,setPost] = useState<PostsProps[]>([])
 
-   
+   const { register ,handleSubmit ,watch} = useForm()
+
+   const [query,setQuery] = useState('')
+
+   let teste:string = watch('query');
 
    const navigate = useNavigate()
-
-   
-   
-
 
    async function getDataApiPosts(){
        
 
-      const res = await apiPost.get('gitblog')
+      const res = await apiPost.get(`issues?q=${query}repo:matthewsbritto/gitblog`)
       .then(res => res.data)
       .catch(err => console.log(err))
 
@@ -51,30 +53,32 @@ export function Form(){
             id:item.id
          }
       })
-
       setPost(newListPosts)
 
    }
 
    const publishs = post.length
 
- 
-   
-
    useEffect(()=>{
       getDataApiPosts();
-   },[])
-   
+      
+   },[query])
+
 
    return(
-      <FormContainer>
+      <FormContainer >
          <InputContainer>
             <div>
                <h3>Publicações</h3>
                <span>{publishs} publicações</span>
             </div>
          
-            <input type="text" placeholder="Buscar conteúdo"/>
+            <input 
+            type="text" 
+            placeholder="Buscar conteúdo" 
+            {...register("query")} 
+            onChange={ (event) => setQuery(event.target.value) }
+            />
          </InputContainer>
 
          <CardsContainer>

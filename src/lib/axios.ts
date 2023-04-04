@@ -7,6 +7,7 @@ export const apiUser = axios.create({
 })
 
 export const apiPost = axios.create({
-   baseURL: "https://api.github.com/search/issues?q=repo:matthewsbritto/"
+   baseURL: "https://api.github.com/search"
+   
 
 })
