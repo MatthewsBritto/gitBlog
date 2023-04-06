@@ -2,26 +2,37 @@ import { CardItem } from "./styles"
 import { PostsProps } from "../Form"
 import { format, formatDistanceToNow, parseISO } from "date-fns"
 import ptBr  from "date-fns/locale/pt-BR";
+import { useNavigate } from "react-router-dom";
 
 
 
-export function Card({body,comments,created_at,html_url,id,title}:PostsProps){
 
+export function Card({body,comments,created_at,url,id,title,index}:PostsProps){
 
-      const dateFormat = format(new Date(created_at), "d 'de' LLLL 'de' yyyy 'as' HH:mm'h'",{
+   
 
-         locale: ptBr,
-      })
+   const navigate = useNavigate()
 
-      const teste = new Date(created_at)
+   const dateFormat = format(new Date(created_at), "d 'de' LLLL 'de' yyyy 'as' HH:mm'h'",{
 
-      const publishedDateRelativeNow = formatDistanceToNow((teste),{
-         locale: ptBr,
-         addSuffix:true,
-      })      
+      locale: ptBr,
+   })
+
+   const teste = new Date(created_at)
+
+   const publishedDateRelativeNow = formatDistanceToNow((teste),{
+      locale: ptBr,
+      addSuffix:true,
+   })      
+
+      function navegateToPost(number:number){
+        
+         navigate(`/post/${number}`)
+
+      }
 
    return (
-      <CardItem key={id}> 
+      <CardItem key={id} onClick={() => {navegateToPost(index)}}> 
 
          <div>
             <h3>{title}</h3>

@@ -8,6 +8,9 @@ export const apiUser = axios.create({
 
 export const apiPost = axios.create({
    baseURL: "https://api.github.com/search"
-   
 
+})
+
+export const postInfo = axios.create({
+   baseURL: "https://api.github.com/repos/MatthewsBritto/gitBlog/issues"
 })

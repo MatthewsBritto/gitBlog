@@ -12,6 +12,7 @@ export interface UserProps {
    followers:number;
    url:string;
    avatar:string;
+   index:number;
 }
 
 export function Home(){
@@ -34,7 +35,8 @@ export function Home(){
          bio: resData.bio,
          followers: resData.followers,
          url: resData.html_url,
-         avatar:resData.avatar_url
+         avatar:resData.avatar_url,
+         index:resData.number
       }
 
       if(newUser){

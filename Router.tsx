@@ -9,7 +9,9 @@ export function Router(){
       <Routes>
          <Route path="/" element={<DefaultLayout/>}>
             <Route path="/" element={<Home />} />
-            <Route path="post" element={<Post />} />
+         </Route>
+         <Route path="post" element={<DefaultLayout/>} >
+            <Route path=":index" element={<Post/>} />
          </Route>
       </Routes>
    );

@@ -10,12 +10,13 @@ import axios from "axios";
 
 
 export interface PostsProps{
-   html_url:string;
+   url:string;
    title:string;
    body:string;
    comments:string;
    created_at: string;
    id:number;
+   index:number;
 }
 
 
@@ -46,11 +47,12 @@ export function Form(){
 
          return {
             title : item.title,
-            html_url: item.html_url,
+            url: item.url,
             body: item.body,
             comments: item.comments,
             created_at: item.created_at,
-            id:item.id
+            id:item.id,
+            index:item.number
          }
       })
       setPost(newListPosts)
@@ -85,13 +87,14 @@ export function Form(){
 
             {post && post.map( item => {
                return (
-                  <Card 
+                  <Card key={item.id}
                      id={item.id} 
                      title={item.title} 
                      body={item.body}
                      created_at={item.created_at}
                      comments={item.comments}
-                     html_url={item.html_url}   
+                     url={item.url}
+                     index={item.index}   
                   />
                   
                )      

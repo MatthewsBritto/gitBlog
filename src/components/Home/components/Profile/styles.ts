@@ -27,6 +27,7 @@ export const TextContainer = styled.div`
       padding: .8rem 0;
       font-size: 1rem;
       font-weight: 400;
+
    }
 `
 
