@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const PostContainer = styled.div`
 
    width:100%;
-   height: 70vh;
+   min-height: 70vh;
    display: flex;
    align-items: center;
    flex-direction: column; 
@@ -21,7 +21,7 @@ export const TitleContainer = styled.div`
     margin: -6rem auto 0px;
     padding: 1rem;
     border-radius: 8px;
-    height: 13.25rem;
+   height: 13.25rem;
     color: white;
    font-family:'nunito';
 
@@ -38,6 +38,8 @@ export const TextContainer = styled.div`
    color: white;
    padding: 1rem;
 
+   height: auto;
+   
     p{
       font-family:'nunito';
       font-size:1.5rem;

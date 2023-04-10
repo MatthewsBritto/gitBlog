@@ -1,10 +1,12 @@
 import { formatDistanceToNow } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { FaGithub, FaCalendar, FaComment , FaLess} from 'react-icons/fa';
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { apiPost, postInfo } from '../../lib/axios'
 import { Infos, Links, PostContainer, TextContainer, TitleContainer } from './styles';
 import ptBr  from "date-fns/locale/pt-BR";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm'
 
 
 
@@ -13,7 +15,7 @@ export interface PostsProps{
    title:string;
    body:string;
    comments:string;
-   created_at: string;
+   created_at: Date;
    id:number;
    index:number;
    login:string;
@@ -23,6 +25,10 @@ export function Post(){
 
    const [post, setPost] = useState<PostsProps>({} as PostsProps)
 
+   const [dateAt, setDateAt] =  useState('')
+
+   const navigate = useNavigate()
+
    const {index} = useParams()
 
    async function getDataApi() {
@@ -31,41 +37,52 @@ export function Post(){
       .then(res => res.data)
       .catch(err => console.log(err)) 
 
+      console.log(res)
+
       const Obj = {
          title: res.title,
          body:res.body,
          comments: res.comments,
-         created_at:res.created_at,
+         created_at: new Date(res.created_at),
          id: res.id,
          index: res.index,
-         url: res.url,
+         url: res.html_url,
          login:res.user.login
       }
 
-      setPost(Obj)
-           
+      if (Obj) {
+         const publishedDateRelativeNow = formatDistanceToNow((Obj.created_at),{
+            locale: ptBr,
+            addSuffix:true,
+         })  
+         setDateAt(publishedDateRelativeNow)
+         setPost(Obj)
+      }
+                
    }
+     
 
-   const teste = new Date(post.created_at)
+ 
 
-   const publishedDateRelativeNow = formatDistanceToNow((teste),{
-      locale: ptBr,
-      addSuffix:true,
-   })  
    useEffect(() =>{
       getDataApi()
    },[])
+
+   
+
    return( 
       <PostContainer>
          <TitleContainer>  
 
             <Links>
-               <li >
+               <li onClick={() => navigate('/')}>
                   <span> Voltar </span>
                </li>
 
                <li>
-                  <span>Ver no github</span>
+                  <a href={post.url}>
+                     <span>Ver no github</span>
+                  </a>
                </li>
             
             </Links>
@@ -78,7 +95,7 @@ export function Post(){
                </li>
                <li>
                   <span><FaCalendar size={20}/></span>
-                  <p>{publishedDateRelativeNow}</p>
+                  <p>{dateAt}</p>
                </li>
                <li>
                   <span><FaComment size={20}/></span>
@@ -88,7 +105,7 @@ export function Post(){
          </TitleContainer>
 
          <TextContainer>
-            <p>{post.body}</p>
+            <ReactMarkdown children={post.body} />
          </TextContainer>
       </PostContainer>
    )

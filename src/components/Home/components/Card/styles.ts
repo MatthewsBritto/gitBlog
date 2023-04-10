@@ -11,6 +11,7 @@ export const CardItem = styled.div`
    font-family:'nunito',sans-serif;
    transition: transform 0.2s ease-in-out;
    border: none;
+   overflow: hidden;
 
    div{
       margin: 1rem 0;

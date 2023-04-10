@@ -7,16 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 
 
-export function Card({body,comments,created_at,url,id,title,index}:PostsProps){
+export function Card({body,comments,created_at,url,id,title,index}:PostsProps) {
 
    
 
    const navigate = useNavigate()
 
-   const dateFormat = format(new Date(created_at), "d 'de' LLLL 'de' yyyy 'as' HH:mm'h'",{
-
-      locale: ptBr,
-   })
 
    const teste = new Date(created_at)
 
@@ -25,11 +21,12 @@ export function Card({body,comments,created_at,url,id,title,index}:PostsProps){
       addSuffix:true,
    })      
 
-      function navegateToPost(number:number){
+   function navegateToPost(number:number){
         
          navigate(`/post/${number}`)
 
-      }
+   }
+
 
    return (
       <CardItem key={id} onClick={() => {navegateToPost(index)}}> 
