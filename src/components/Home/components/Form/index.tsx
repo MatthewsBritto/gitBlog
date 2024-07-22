@@ -25,7 +25,7 @@ export function Form(){
 
    const [query,setQuery] = useState('')
 
-   let teste:string = watch('query');
+   const [initialPosts, setInitialPosts] = useState<PostsProps[]>([])
 
    const navigate = useNavigate()
 
@@ -36,9 +36,8 @@ export function Form(){
       .then(res => res.data)
       .catch(err => console.log(err))
 
-      const listPosts = res.items
 
-      const newListPosts = listPosts.map((item:any) => {
+      const newListPosts = res.items.map((item:any) => {
          
          return {
             title : item.title,
@@ -51,16 +50,22 @@ export function Form(){
          }
       })
 
+      setInitialPosts(newListPosts)
       setPost(newListPosts)
 
    }
 
    function filterPosts(word:string) {
-      const filter = post.filter(
+      const filter = initialPosts.filter(
          post => post.body.toLowerCase().includes(word.toLowerCase()) || post.title.toLowerCase().includes(word.toLowerCase())
       )
 
-      filter && console.log(filter)
+      if (word.length === 0) {
+         setPost(initialPosts)
+      } else {
+
+         setPost(filter)
+      }
    }
 
    const publishs = post.length
@@ -83,6 +88,7 @@ export function Form(){
             placeholder="Buscar conteúdo ..." 
             {...register("query")} 
             onChange={ (event) => filterPosts(event.target.value) }
+            
             />
          </InputContainer>
 
