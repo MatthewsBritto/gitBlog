@@ -18,22 +18,28 @@ export const CardItem = styled.div`
       display: flex;
       justify-content: space-between;
       font-weight: 700;
+      align-items:end;
 
       h3{
          width: 70%;
-         font-size:1.25rem ;
+         font-size:1.2rem ;
       }
       span{
          color: ${p => p.theme["base-span"]};
          font-weight: 400;
+         font-size:.8rem;
       }
    }
 
 
-   p{
+   p {
+         
          font-weight: 400;
          color: ${p => p.theme["base-span"]};
          line-height:160%;
+         text-overflow:ellipsis;
+         overflow:hidden;
+         white-space:break-spaces;
    }
 
    &:hover{

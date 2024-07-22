@@ -5,14 +5,9 @@ import ptBr  from "date-fns/locale/pt-BR";
 import { useNavigate } from "react-router-dom";
 
 
-
-
 export function Card({body,comments,created_at,url,id,title,index}:PostsProps) {
 
-   
-
    const navigate = useNavigate()
-
 
    const teste = new Date(created_at)
 

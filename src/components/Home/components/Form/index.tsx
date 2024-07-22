@@ -1,13 +1,9 @@
-import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiPost } from "../../../../lib/axios";
 import { FormContainer, InputContainer,CardsContainer} from "./styles";
 import { Card } from "../Card";
 import { useForm } from 'react-hook-form'
-import axios from "axios";
-
-
 
 export interface PostsProps{
    url:string;
@@ -25,7 +21,7 @@ export function Form(){
 
    const [post,setPost] = useState<PostsProps[]>([])
 
-   const { register ,handleSubmit ,watch} = useForm()
+   const { register, watch} = useForm()
 
    const [query,setQuery] = useState('')
 
@@ -44,7 +40,6 @@ export function Form(){
 
       const newListPosts = listPosts.map((item:any) => {
          
-
          return {
             title : item.title,
             url: item.url,
@@ -55,16 +50,24 @@ export function Form(){
             index:item.number
          }
       })
+
       setPost(newListPosts)
 
    }
 
+   function filterPosts(word:string) {
+      const filter = post.filter(
+         post => post.body.toLowerCase().includes(word.toLowerCase()) || post.title.toLowerCase().includes(word.toLowerCase())
+      )
+
+      filter && console.log(filter)
+   }
+
    const publishs = post.length
 
-   useEffect(()=>{
+   useEffect(()=> {
       getDataApiPosts();
-      
-   },[query])
+   },[])
 
 
    return(
@@ -77,9 +80,9 @@ export function Form(){
          
             <input 
             type="text" 
-            placeholder="Buscar conteúdo" 
+            placeholder="Buscar conteúdo ..." 
             {...register("query")} 
-            onChange={ (event) => setQuery(event.target.value) }
+            onChange={ (event) => filterPosts(event.target.value) }
             />
          </InputContainer>
 

@@ -37,8 +37,6 @@ export function Post(){
       .then(res => res.data)
       .catch(err => console.log(err)) 
 
-      console.log(res)
-
       const Obj = {
          title: res.title,
          body:res.body,

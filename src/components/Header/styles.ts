@@ -8,8 +8,11 @@ export const HeaderContainer = styled.header`
    display: flex;
    justify-content: space-between;
    align-items:center;
+   z-index: 0;
 
-
+   img {
+      z-index:0;
+   }
    img:first-of-type{
       transform: rotate(180deg);
    }

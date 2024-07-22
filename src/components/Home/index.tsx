@@ -16,9 +16,6 @@ export interface UserProps {
 }
 
 export function Home(){
-
-  
-
    const [user,setUser] = useState<UserProps>({} as UserProps)
 
 

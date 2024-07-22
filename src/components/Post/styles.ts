@@ -55,6 +55,7 @@ export const Infos = styled.ul`
    align-items: center;
    justify-content: flex-start;
    margin:2rem 0 0 1rem;
+   z-index:10;
 
    li{
       list-style:none;
@@ -78,11 +79,20 @@ export const Links = styled.ul`
    color: ${props => props.theme.blue};
    justify-content: space-between;
    align-items: center;
-   padding: 1rem;   
+   padding: .5rem;   
    
-   li{
+   li {
       list-style:none;
       font-family:'nunito';
       cursor: pointer;
+      padding:.2rem;
+      z-index: 2;
+      
+      
+      a {
+         text-decoration:none;
+         color: ${props => props.theme.blue};
+      }
+
    }
 `
